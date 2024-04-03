@@ -88,6 +88,8 @@
               git
               #              (pkgs.llvmPackages_18.libcxx.override { enableShared = false; })
               pkgs.llvmPackages_18.compiler-rt
+              scons
+              python3
               cmake
               cmakeCurses
               ninja
@@ -134,7 +136,7 @@
               libXfixes
               libxkbcommon
             ];
-
+          nativeBuildInputs = packages;
           # Setting up the environment variables you need during
           # development.
           #      shellHook = let
@@ -144,10 +146,11 @@
           #      '';
         };
 
-        packages.default = pkgs.callPackage ./default.nix {
-          #          stdenv = pkgs.llvmPackages_18.stdenv;
-          stdenv = pkgs.llvmPackages_18.stdenv;
-          withTarget = "template_debug";
-        };
+        #        packages.default = pkgs.callPackage ./default.nix {
+        #          stdenv = pkgs.llvmPackages_18.stdenv;
+        #          stdenv = pkgs.llvmPackages_18.stdenv;
+        #          withTarget = "template_debug";
+        #        };
+        # this is way too annoying to build with nix because of the binary sdk dependency
       });
 }

@@ -5,6 +5,7 @@
 .import/
 export.cfg
 export_presets.cfg
+*.import
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -24,6 +25,7 @@ mono_crash.*.json
 *.exp
 *.lib
 
+thirdparty/
 
 .direnv/
 result
