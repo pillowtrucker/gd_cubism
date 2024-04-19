@@ -73,21 +73,22 @@
           config.allowUnfree = true;
         };
       in {
-        devShells.default = pkgs.llvmPackages_18.stdenv.mkDerivation rec {
+        #        devShells.default = pkgs.llvmPackages_18.stdenv.mkDerivation rec {
+        devShells.default = pkgs.mkShell rec {
           # Update the name to something that suites your project.
           name = "gd_cubism_shell";
-          stdenv = pkgs.llvmPackages_18.stdenv;
+          #          stdenv = pkgs.llvmPackages_18.stdenv;
           #          stdenv = pkgs.llvmPackages_18.libcxxStdenv;
           packages = with pkgs;
             with xorg;
             [
               # Development Tools
               (clang-tools.override { llvmPackages = llvmPackages_18; })
-              llvmPackages_18.bintools
+              #             llvmPackages_18.bintools
               python3
               git
               #              (pkgs.llvmPackages_18.libcxx.override { enableShared = false; })
-              pkgs.llvmPackages_18.compiler-rt
+              #              pkgs.llvmPackages_18.compiler-rt
               scons
               python3
               cmake
@@ -136,7 +137,7 @@
               libXfixes
               libxkbcommon
             ];
-          nativeBuildInputs = packages;
+          #         nativeBuildInputs = packages;
           # Setting up the environment variables you need during
           # development.
           #      shellHook = let

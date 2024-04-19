@@ -32,8 +32,8 @@ in stdenv.mkDerivation rec {
     pkg-config
     #    autoPatchelfHook
     #    installShellFiles
-    (pkgs.clang-tools.override { llvmPackages = pkgs.llvmPackages_18; })
-    pkgs.llvmPackages_18.bintools
+    #    (pkgs.clang-tools.override { llvmPackages = pkgs.llvmPackages_18; })
+    #    pkgs.llvmPackages_18.bintools
 
   ];
 
@@ -41,7 +41,7 @@ in stdenv.mkDerivation rec {
     scons
     #    (pkgs.llvmPackages_18.libcxx.override { enableShared = false; })
     #    pkgs.llvmPackages_18.libraries.libcxx
-    pkgs.llvmPackages_18.compiler-rt
+    #    pkgs.llvmPackages_18.compiler-rt
   ];
 
   runtimeDependencies = [
