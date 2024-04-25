@@ -1,12 +1,9 @@
-= Cubism for GDScript
+= Cubism for Godot Engine
 :encoding: utf-8
-:lang: ja
+:lang: en
 :author: MizunagiKB <mizukb@live.jp>
 :copyright: 2023 MizunagiKB
 :doctype: book
-:nofooter:
-:toc: left
-:toclevels: 3
 :source-highlighter: highlight.js
 :icons: font
 :experimental:
@@ -17,11 +14,6 @@ ifdef::env-github,env-vscode[]
 endif::env-github,env-vscode[]
 ifndef::env-github,env-vscode[]
 :adocsuffix: .html
-endif::env-github,env-vscode[]
-
-
-ifdef::env-github,env-vscode[]
-link:README.adoc[Japanese] / link:README.en.adoc[English]
 endif::env-github,env-vscode[]
 
 
@@ -75,17 +67,17 @@ GDCubism は依存する外部ライブラリとリンクすることで、異�
 GDCubism を組み込んでの配布や販売を考えている場合は以下のページに記載されているライセンスを確認してください。
 ====
 
-* link:./docs-src/modules/ROOT/pages/ja/license.adoc[License]
+* xref:ja/license.adoc[]
 
 
 == ビルド方法
 
-* link:./docs-src/modules/ROOT/pages/ja/build.adoc[Build]
+* xref:ja/build.adoc[]
 
 
 == 使用方法
 
-* link:./docs-src/modules/ROOT/pages/ja/usage.adoc[Usage]
+* xref:ja/usage.adoc[]
 
 
 == 関連情報
