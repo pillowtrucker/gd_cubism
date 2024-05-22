@@ -27,6 +27,12 @@ jobs:
         - uses: actions/checkout@v4
           with:
             submodules: recursive
+        - uses: actions/checkout@v4
+          with:
+            repository: pillowtrucker/CubismNativeFramework
+            path: thirdparty/CubismNativeFramework
+            ref: reconstruct-corrupt-model-curve-totals
+            submodules: recursive
         - name: Restore Cubism SDK Cache
           id: cache-cubism-sdk-restore
           uses: actions/cache/restore@v4
