@@ -1,0 +1,66 @@
+on:
+  push:
+    branches:
+      [main, master]
+  workflow_call:
+    inputs:
+      gd_cubism_subdirectory:
+        required: false
+        type: string
+
+concurrency:
+  group: build-gdc-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+    build:
+      name: build gd_cubism on ${{ matrix.os }}
+      defaults:
+        run:
+          working-directory: ./${{ inputs.gd_cubism_subdirectory }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Restore Cubism SDK Cache
+        id: cache-cubism-sdk-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: CubismSdkForNative-5-r.1.zip
+          key: cubism-sdk-cache
+      - name: download sdk on windows
+        if: ${{ matrix.os == 'windows-latest' && steps.cache-cubism-sdk-restore.outputs.cache-hit != 'true' }}
+        run: Invoke-WebRequest -Uri https://cubism.live2d.com/sdk-native/bin/CubismSdkForNative-5-r.1.zip -OutFile CubismSdkForNative-5-r.1.zip
+      - name: download sdk on linux
+        if: ${{ matrix.os == 'ubuntu-latest' && steps.cache-cubism-sdk-restore.outputs.cache-hit != 'true' }}
+        run: wget https://cubism.live2d.com/sdk-native/bin/CubismSdkForNative-5-r.1.zip
+      - name: Save Cubism SDK Cache
+        if: ${{ steps.cache-primes.outputs.cache-hit != 'true' }}
+        id: cache-cubism-sdk-save
+        uses: actions/cache/save@v4
+        with:
+          path: CubismSdkForNative-5-r.1.zip
+        key: ${{ steps.cache-cubism-sdk-restore.outputs.cache-primary-key }}
+      - name: Extract Cubism SDK
+        run: |
+          cd thirdparty
+          7z x ../CubismSdkForNative-5-r.1.zip
+      - name: get scons
+        run: pip install scons
+      - name: build release on linux
+        if: ${{ matrix.os == 'ubuntu-latest'}}
+        run: python -mSCons platform=linux arch=x86_64 target=template_release
+      - name: build debug on linux
+        if: ${{ matrix.os == 'ubuntu-latest'}}
+        run: python -mSCons platform=linux arch=x86_64 target=template_debug
+      - name: build release on windows
+        if: ${{ matrix.os == 'windows-latest'}}
+        run: python -mSCons platform=windows arch=x86_64 target=template_release
+      - name: build debug on windows
+        if: ${{ matrix.os == 'windows-latest'}}
+        run: python -mSCons platform=windows arch=x86_64 target=template_debug
