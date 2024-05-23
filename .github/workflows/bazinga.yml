@@ -17,7 +17,7 @@ jobs:
       name: build gd_cubism on ${{ matrix.os }}
       defaults:
         run:
-          working-directory: ./${{ inputs.gd_cubism_subdirectory }}
+          working-directory: ./${{ inputs.subdirectory }}
       runs-on: ${{ matrix.os }}
       strategy:
         fail-fast: false
