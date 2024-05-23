@@ -55,7 +55,7 @@ jobs:
         - name: Extract Cubism SDK
           run: |
             cd thirdparty
-            7z x ${github.workspace}/CubismSdkForNative-5-r.1.zip
+            7z x ${{ github.workspace }}/CubismSdkForNative-5-r.1.zip
         - name: get scons
           run: pip install scons
         - name: build release on linux
