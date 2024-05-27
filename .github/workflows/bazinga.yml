@@ -60,16 +60,16 @@ jobs:
           run: pip install scons
         - name: build release on linux
           if: ${{ matrix.os == 'ubuntu-latest'}}
-          run: python -mSCons platform=linux arch=x86_64 target=template_release
+          run: python -mSCons platform=linux arch=x86_64 target=template_release precision=double
         - name: build debug on linux
           if: ${{ matrix.os == 'ubuntu-latest'}}
-          run: python -mSCons platform=linux arch=x86_64 target=template_debug
+          run: python -mSCons platform=linux arch=x86_64 target=template_debug precision=double
         - name: build release on windows
           if: ${{ matrix.os == 'windows-latest'}}
-          run: python -mSCons platform=windows arch=x86_64 target=template_release
+          run: python -mSCons platform=windows arch=x86_64 target=template_release precision=double
         - name: build debug on windows
           if: ${{ matrix.os == 'windows-latest'}}
-          run: python -mSCons platform=windows arch=x86_64 target=template_debug
+          run: python -mSCons platform=windows arch=x86_64 target=template_debug precision=double
         - uses: actions/upload-artifact@v4
           with:
             name: gd_cubism-${{ runner.os }}
