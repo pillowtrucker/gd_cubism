@@ -58,7 +58,8 @@
 
               #                clang-tools_18 = prev.callPackage
               #                  "${inputs.nixpkgs-llvm18}/pkgs/development/tools/clang-tools" {
-              llvmPackages = prev.llvmPackages_18;
+
+              llvmPackages = final.llvmPackages_18;
               #                  };
               #              })
               #                llvmPackages_18 clang_18 lld_18 lldb_18 llvm_18 clang-tools_18;
