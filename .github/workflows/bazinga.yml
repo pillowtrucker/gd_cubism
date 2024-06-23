@@ -37,7 +37,7 @@ jobs:
           id: cache-cubism-sdk-restore
           uses: actions/cache/restore@v4
           with:
-            path: CubismSdkForNative-5-r.1.zip
+            path: ./${{ inputs.subdirectory }}/CubismSdkForNative-5-r.1.zip
             key: cubism-sdk-cache
         - name: download sdk on windows
           if: ${{ matrix.os == 'windows-latest' && steps.cache-cubism-sdk-restore.outputs.cache-hit != 'true' }}
@@ -50,7 +50,7 @@ jobs:
           id: cache-cubism-sdk-save
           uses: actions/cache/save@v4
           with:
-            path: CubismSdkForNative-5-r.1.zip
+            path: ./${{ inputs.subdirectory }}/CubismSdkForNative-5-r.1.zip
             key: ${{ steps.cache-cubism-sdk-restore.outputs.cache-primary-key }}
         - name: Extract Cubism SDK
           run: |
